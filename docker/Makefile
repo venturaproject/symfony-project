@@ -1,4 +1,3 @@
-
 PROJECT_NAME=symfony-project
 APP_CONTAINER=php-fpm
 
@@ -10,5 +9,4 @@ app-container:
 	@docker exec -it $(APP_CONTAINER) bash
 
 run-composer:
-	@@docker exec -it $(APP_CONTAINER) composer install
- 
+	@docker exec -it $(APP_CONTAINER) composer install

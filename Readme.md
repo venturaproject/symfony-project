@@ -43,6 +43,7 @@ The application architecture is based on the Onion Architecture pattern, emphasi
 
 ## Directory Structure
 
+```
 ├── Shared
 │   ├── Application
 │   │   ├── Command
@@ -68,6 +69,7 @@ The application architecture is based on the Onion Architecture pattern, emphasi
         ├── Database
         │   └── ORM
         └── Repository
+```
 
 
 

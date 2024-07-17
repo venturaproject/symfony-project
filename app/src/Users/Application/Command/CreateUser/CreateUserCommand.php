@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Users\Application\Command\CreateUser;
+
+use App\Shared\Application\Command\CommandInterface;
+
+class CreateUserCommand implements CommandInterface
+{
+    public function __construct(public readonly string $email, public readonly string $password)
+    {
+    }
+    
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+}

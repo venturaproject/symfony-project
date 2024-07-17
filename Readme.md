@@ -44,6 +44,33 @@ The application architecture is based on the Onion Architecture pattern, emphasi
 ## Directory Structure
 
 
+.
+├── Shared
+│   ├── Application
+│   │   ├── Command
+│   │   └── Query
+│   ├── Infrastructure
+│   │   ├── Database
+│   │   │   └── Migrations
+│   │   └── Bus
+│   └── Domain
+│       └── Service
+└── Users
+    ├── Application
+    │   ├── DTO
+    │   ├── Command
+    │   │   └── CreateUser
+    │   └── Query
+    │       └── FindUserByEmail
+    ├── Infrastructure
+    │   ├── Database
+    │   │   └── ORM
+    │   └── Repository
+    └── Domain
+        ├── Repository
+        ├── Entity
+        └── Factory
+
 
 
 

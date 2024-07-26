@@ -1,39 +1,54 @@
+# Use the official PHP 8.2.0 image with FPM and Alpine Linux for a lightweight PHP setup
 FROM php:8.2.0-fpm-alpine
 
-# Instalar paquetes necesarios
+# Install necessary packages
 RUN apk add --no-cache curl git build-base zlib-dev oniguruma-dev autoconf bash
 
-# Instalar headers de Linux
+# Install Linux headers required for some extensions and tools
 RUN apk add --update linux-headers
 
-# Instalar Xdebug si está habilitado
+# Optionally install Xdebug for debugging PHP code
+# If INSTALL_XDEBUG is set to true, Xdebug will be installed and enabled
 ARG INSTALL_XDEBUG=false
 RUN if [ ${INSTALL_XDEBUG} = true ]; then \
     pecl install xdebug && docker-php-ext-enable xdebug; \
 fi;
 
-# Copiar la configuración de PHP y Xdebug a archivos separados
+# Copy custom PHP and Xdebug configuration files into the container
 COPY php.ini /usr/local/etc/php/conf.d/docker-php-config.ini
 COPY xdebug.ini /usr/local/etc/php/conf.d/docker-php-xdebug.ini
 
-# Instalar soporte para PostgreSQL
+# Install PostgreSQL support for PDO
 RUN apk add --no-cache libpq-dev && docker-php-ext-install pdo_pgsql
 
-# Configurar usuario no root
+# Configure non-root user for better security practices
+# Create a non-root user with specified UID and GID for file ownership and permissions
 ARG PUID=1000
 ARG PGID=1000
 RUN apk --no-cache add shadow && \
     groupmod -o -g ${PGID} www-data && \
     usermod -o -u ${PUID} -g www-data www-data
 
+# Switch to the non-root user
 USER www-data
 
-# Instalar Composer
+# Install Composer for PHP dependency management
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Directorio de trabajo
+# Install Node.js and Yarn for managing JavaScript dependencies
+# This step uses the NodeSource repository to install Node.js and Yarn
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g yarn \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set the working directory for the application
 WORKDIR /var/www
 
+# Start PHP-FPM service when the container runs
 CMD php-fpm
 
+# Expose port 9000 for PHP-FPM
 EXPOSE 9000
+

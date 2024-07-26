@@ -4,36 +4,30 @@ namespace App\Products\Infrastructure\Repository;
 
 use App\Products\Domain\Entity\Product;
 use App\Products\Domain\Repository\ProductRepositoryInterface;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 
-class ProductRepository extends ServiceEntityRepository implements ProductRepositoryInterface
+class ProductRepository implements ProductRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        parent::__construct($registry, Product::class);
+        $this->entityManager = $entityManager;
     }
 
     public function add(Product $product): void
     {
-        $this->getEntityManager()->persist($product);
-        $this->getEntityManager()->flush();
+        $this->entityManager->persist($product);
+        $this->entityManager->flush();
     }
 
-    public function findByUlid(string $ulid): ?Product // Asegúrate de que coincida con la interfaz
+    public function findByUlid(string $ulid): ?Product
     {
-        return $this->find($ulid);
+        return $this->entityManager->getRepository(Product::class)->find($ulid);
     }
 
     public function findActiveProducts(): array
     {
-        return $this->findBy(['isActive' => true]);
-    }
-
-    public function delete(Product $product): void
-    {
-        $entityManager = $this->getEntityManager();
-        $entityManager->remove($product);
-        $entityManager->flush();
+        return $this->entityManager->getRepository(Product::class)->findBy(['isActive' => true]);
     }
 }

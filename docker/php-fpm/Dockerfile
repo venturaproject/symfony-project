@@ -29,19 +29,15 @@ RUN apk --no-cache add shadow && \
     groupmod -o -g ${PGID} www-data && \
     usermod -o -u ${PUID} -g www-data www-data
 
-# Switch to the non-root user
+# Install Node.js and Yarn as root
+USER root
+RUN apk add --no-cache nodejs npm && npm install -g yarn
+
+# Switch to the non-root user for security
 USER www-data
 
 # Install Composer for PHP dependency management
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Install Node.js and Yarn for managing JavaScript dependencies
-# This step uses the NodeSource repository to install Node.js and Yarn
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs \
-    && npm install -g yarn \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
 
 # Set the working directory for the application
 WORKDIR /var/www
@@ -51,4 +47,3 @@ CMD php-fpm
 
 # Expose port 9000 for PHP-FPM
 EXPOSE 9000
-

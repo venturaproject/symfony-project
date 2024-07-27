@@ -29,5 +29,4 @@ services:
       tags:
         - { name: messenger.message_handler, bus: query.bus }
     
-    App\Products\Application\Query\GetActiveProducts\GetActiveProductsQueryHandler:
-      public: true
+

@@ -44,31 +44,97 @@ The application architecture is based on the Onion Architecture pattern, emphasi
 ## Directory Structure
 
 ```
+├── Products
+│   ├── Application
+│   │   ├── Command
+│   │   │   ├── CreateProduct
+│   │   │   │   ├── CreateProductCommand.php
+│   │   │   │   └── CreateProductCommandHandler.php
+│   │   │   └── CreateProductConsoleCommand.php
+│   │   ├── DTO
+│   │   │   └── ProductDTO.php
+│   │   └── Query
+│   │       ├── GetActiveProducts
+│   │       │   ├── GetActiveProductsQuery.php
+│   │       │   └── GetActiveProductsQueryHandler.php
+│   │       └── GetProductById
+│   │           ├── GetProductByIdQuery.php
+│   │           └── GetProductByIdQueryHandler.php
+│   ├── Domain
+│   │   ├── Entity
+│   │   │   └── Product.php
+│   │   ├── Factory
+│   │   │   └── ProductFactory.php
+│   │   └── Repository
+│   │       └── ProductRepositoryInterface.php
+│   └── Infrastructure
+│       ├── Database
+│       │   └── ORM
+│       │       └── Product.orm.xml
+│       └── Repository
+│           └── ProductRepository.php
 ├── Shared
-│   ├── Application
-│   │   ├── Command
-│   │   └── Query
-│   ├── Domain
-│   │   └── Service
-│   └── Infrastructure
-│       ├── Bus
-│       └── Database
-│           └── Migrations
+│   ├── Application
+│   │   ├── Command
+│   │   │   ├── CommandBusInterface.php
+│   │   │   ├── CommandHandlerInterface.php
+│   │   │   └── CommandInterface.php
+│   │   └── Query
+│   │       ├── QueryBusInterface.php
+│   │       ├── QueryHandlerInterface.php
+│   │       └── QueryInterface.php
+│   ├── Domain
+│   │   └── Service
+│   │       └── UlidService.php
+│   └── Infrastructure
+│       ├── Bus
+│       │   ├── CommandBus.php
+│       │   └── QueryBus.php
+│       ├── Controller
+│       │   ├── HealthCheckAction.php
+│       │   ├── HomepageController.php
+│       │   ├── PhpinfoController.php
+│       │   └── ProductController.php
+│       ├── Database
+│       │   ├── Fixtures
+│       │   │   └── ProductFixtures.php
+│       │   └── Migrations
+│       │       ├── Version20240706235206.php
+│       │       ├── Version20240726082748.php
+│       │       └── Version20240726165031.php
+│       └── Kernel.php
 └── Users
     ├── Application
-    │   ├── Command
-    │   │   └── CreateUser
-    │   ├── DTO
-    │   └── Query
-    │       └── FindUserByEmail
+    │   ├── Command
+    │   │   ├── CreateUser
+    │   │   │   ├── CreateUserCommand.php
+    │   │   │   └── CreateUserCommandHandler.php
+    │   │   ├── CreateUserConsoleCommand.php
+    │   │   ├── EraseUserCredentials
+    │   │   │   ├── EraseUserCredentialsCommand.php
+    │   │   │   └── EraseUserCredentialsCommandHandler.php
+    │   │   └── EraseUserCredentialsConsoleCommand.php
+    │   ├── DTO
+    │   │   └── UserDTO.php
+    │   └── Query
+    │       └── FindUserByEmail
+    │           ├── FindUserByEmailQuery.php
+    │           └── FindUserByEmailQueryHandler.php
     ├── Domain
-    │   ├── Entity
-    │   ├── Factory
-    │   └── Repository
+    │   ├── Entity
+    │   │   └── User.php
+    │   ├── Factory
+    │   │   └── UserFactory.php
+    │   ├── Repository
+    │   │   └── UserRepositoryInterface.php
+    │   └── Service
+    │       └── UserCredentialsService.php
     └── Infrastructure
         ├── Database
-        │   └── ORM
+        │   └── ORM
+        │       └── User.orm.xml
         └── Repository
+            └── UserRepository.php
 ```
 
 

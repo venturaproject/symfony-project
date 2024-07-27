@@ -29,7 +29,7 @@ class Product
     #[ORM\Column(type: Types::BOOLEAN)]
     private ?bool $isActive = null;
 
-    public function __construct(string $name, float $price, ?string $sku = 'DEFAULT_SKU')
+    public function __construct(string $name, float $price, string $sku)
     {
         $this->ulid = UlidService::generate();
         $this->name = $name;

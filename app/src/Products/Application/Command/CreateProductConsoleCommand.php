@@ -33,7 +33,7 @@ class CreateProductConsoleCommand extends Command
         $this
             ->addArgument('name', InputArgument::REQUIRED, 'The name of the product.')
             ->addArgument('price', InputArgument::REQUIRED, 'The price of the product.')
-            ->addArgument('sku', InputArgument::OPTIONAL, 'The SKU of the product.', 'DEFAULT_SKU');
+            ->addArgument('sku', InputArgument::REQUIRED, 'The SKU of the product.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

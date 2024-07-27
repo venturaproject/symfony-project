@@ -24,7 +24,7 @@ class ProductController extends AbstractController
         $this->getProductByIdQueryHandler = $getProductByIdQueryHandler;
     }
 
-    #[Route('/products/active', name: 'get_active_products')]
+    #[Route('/products', name: 'get_active_products')]
     public function getActiveProducts(): Response
     {
         $query = new GetActiveProductsQuery();

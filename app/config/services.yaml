@@ -28,5 +28,9 @@ services:
     App\Shared\Application\Query\QueryHandlerInterface:
       tags:
         - { name: messenger.message_handler, bus: query.bus }
-    
 
+  Shared\Infrastructure\EventSubscriber\RouteNotFoundSubscriber:
+    tags:
+      - { name: 'kernel.event_subscriber' }
+    bind:
+      $urlGenerator: '@router'

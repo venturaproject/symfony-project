@@ -43,6 +43,15 @@ services:
     networks:
       - app-network
 
+  mailhog:
+    container_name: mailhog
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - app-network
+
 volumes:
   db_data:
 

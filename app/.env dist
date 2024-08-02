@@ -38,4 +38,4 @@ MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0
 
 ###> openweathermap  ###
 OPEN_WEATHER_MAP_API_URL=https://api.openweathermap.org/data/2.5/weather
-OPEN_WEATHER_MAP_API_KEY=2d48b1d7080d09ea964e645ccd1ec93f
+OPEN_WEATHER_MAP_API_KEY={ADD_OPEN_WEATHER_MAP_API_KEY}

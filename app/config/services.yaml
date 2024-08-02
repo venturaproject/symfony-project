@@ -1,39 +1,36 @@
-# This file is the entry point to configure your own services.
-# Files in the packages/ subdirectory configure your dependencies.
-
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
-parameters:
+# config/services.yaml
 
 services:
-  # Default configuration for services defined in this file
   _defaults:
-    autowire: true      # Automatically injects dependencies into your services based on type-hinting.
-    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc., based on their implemented interfaces or parent classes.
+    autowire: true
+    autoconfigure: true
 
-  # Define services for classes in the src/ directory
-  # This creates a service per class whose id is the fully-qualified class name
   App\:
     resource: '../src/'
     exclude:
-      - '../src/DependencyInjection/'  # Exclude DependencyInjection directory from automatic service loading.
-      - '../src/Entity/'                # Exclude Entity directory from automatic service loading (often used for entities only, not services).
-      - '../src/Kernel.php'             # Exclude Kernel.php from automatic service loading (this is typically a special file that is not a service).
+      - '../src/DependencyInjection/'
+      - '../src/Entity/'
+      - '../src/Kernel.php'
 
   # Configuration for classes implementing specific interfaces
   _instanceof:
     App\Shared\Application\Command\CommandHandlerInterface:
       tags:
-        - { name: messenger.message_handler, bus: command.bus }  # Tag classes implementing CommandHandlerInterface to be used as message handlers for the command bus.
+        - { name: messenger.message_handler, bus: command.bus }
 
     App\Shared\Application\Query\QueryHandlerInterface:
       tags:
-        - { name: messenger.message_handler, bus: query.bus }    # Tag classes implementing QueryHandlerInterface to be used as message handlers for the query bus.
+        - { name: messenger.message_handler, bus: query.bus }
 
   # Explicitly define the RouteNotFoundSubscriber service
   Shared\Infrastructure\EventSubscriber\RouteNotFoundSubscriber:
     tags:
-      - { name: 'kernel.event_subscriber' } # Register the service as an event subscriber, so it listens to kernel events.
+      - { name: 'kernel.event_subscriber' }
     bind:
-      $urlGenerator: '@router'              # Bind the UrlGeneratorInterface service (aliased as '@router') to the $urlGenerator parameter of the RouteNotFoundSubscriber constructor.
+      $urlGenerator: '@router'
 
+  # Define the OpenWeatherMapService service
+  Shared\Infrastructure\Service\OpenWeatherMapService:
+    arguments:
+      $apiKey: '%env(OPEN_WEATHER_MAP_API_KEY)%'
+      $apiUrl: '%env(OPEN_WEATHER_MAP_API_URL)%'

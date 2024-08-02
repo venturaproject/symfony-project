@@ -4,14 +4,17 @@ Encore
     .setOutputPath('public/build/')
     .setPublicPath('/build')
     .addEntry('app', './assets/app.js')
+    .addStyleEntry('styles', './assets/styles/tailwind.css')
+    .splitEntryChunks()
     .enableSingleRuntimeChunk()
+    .cleanupOutputBeforeBuild()
+    .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
-    .enablePostCssLoader() // Ensure this is enabled
-    .disableLoader(() => {}) // Disable any unnecessary loaders
-    .configureBabelPresetEnv((config) => {
-        config.useBuiltIns = 'usage';
-        config.corejs = 3;
+    .enableVersioning(Encore.isProduction())
+    .configureBabel(() => {}, {
+        useBuiltIns: 'usage',
+        corejs: 3
     })
-;
+    .enablePostCssLoader();
 
 module.exports = Encore.getWebpackConfig();

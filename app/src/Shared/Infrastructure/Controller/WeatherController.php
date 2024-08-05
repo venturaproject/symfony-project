@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
+// src/Shared/Infrastructure/Controller/WeatherController.php
 namespace App\Shared\Infrastructure\Controller;
-
 
 use Shared\Infrastructure\Form\CityType;
 use Shared\Infrastructure\Service\OpenWeatherMapService;
+use Shared\Infrastructure\Service\MailService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,10 +16,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class WeatherController extends AbstractController
 {
     private OpenWeatherMapService $weatherService;
+    private MailService $mailService;
 
-    public function __construct(OpenWeatherMapService $weatherService)
+    public function __construct(OpenWeatherMapService $weatherService, MailService $mailService)
     {
         $this->weatherService = $weatherService;
+        $this->mailService = $mailService;
     }
 
     #[Route('/weather', name: 'weather_search')]
@@ -37,6 +40,14 @@ class WeatherController extends AbstractController
             if (isset($weatherData['error'])) {
                 $errorMessage = $weatherData['error'];
                 $weatherData = null;
+            } else {
+                // Send email with weather data
+                $this->mailService->send(
+                    $this->getParameter('mailer_sender'),
+                    'Weather Information',
+                    'weather_email',
+                    ['weatherData' => $weatherData]
+                );
             }
         }
 
@@ -47,6 +58,7 @@ class WeatherController extends AbstractController
         ]);
     }
 }
+
 
 
 

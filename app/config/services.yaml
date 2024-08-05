@@ -1,5 +1,7 @@
 # config/services.yaml
-
+parameters:
+    mailer_sender: '%env(MAILER_SENDER)%'
+    
 services:
   _defaults:
     autowire: true
@@ -34,3 +36,8 @@ services:
     arguments:
       $apiKey: '%env(OPEN_WEATHER_MAP_API_KEY)%'
       $apiUrl: '%env(OPEN_WEATHER_MAP_API_URL)%'
+
+  # Define the MailService service
+  Shared\Infrastructure\Service\MailService:
+    arguments:
+      $defaultSender: '%mailer_sender%'

@@ -39,3 +39,7 @@ MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0
 ###> openweathermap  ###
 OPEN_WEATHER_MAP_API_URL=https://api.openweathermap.org/data/2.5/weather
 OPEN_WEATHER_MAP_API_KEY={ADD_OPEN_WEATHER_MAP_API_KEY}
+
+###> symfony/mailer ###
+MAILER_DSN=smtp://mailhog:1025
+###< symfony/mailer ###

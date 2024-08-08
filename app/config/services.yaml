@@ -25,19 +25,19 @@ services:
         - { name: messenger.message_handler, bus: query.bus }
 
   # Explicitly define the RouteNotFoundSubscriber service
-  Shared\Infrastructure\EventSubscriber\RouteNotFoundSubscriber:
+  App\Shared\Infrastructure\EventSubscriber\RouteNotFoundSubscriber:
     tags:
       - { name: 'kernel.event_subscriber' }
     bind:
       $urlGenerator: '@router'
 
   # Define the OpenWeatherMapService service
-  Shared\Infrastructure\Service\OpenWeatherMapService:
+  App\Shared\Infrastructure\Service\OpenWeatherMapService:
     arguments:
       $apiKey: '%env(OPEN_WEATHER_MAP_API_KEY)%'
       $apiUrl: '%env(OPEN_WEATHER_MAP_API_URL)%'
 
   # Define the MailService service
-  Shared\Infrastructure\Service\MailService:
+  App\Shared\Infrastructure\Service\MailService:
     arguments:
       $defaultSender: '%mailer_sender%'

@@ -5,9 +5,9 @@ declare(strict_types=1);
 // src/Shared/Infrastructure/Controller/WeatherController.php
 namespace App\Shared\Infrastructure\Controller;
 
-use Shared\Infrastructure\Form\CityType;
-use Shared\Infrastructure\Service\OpenWeatherMapService;
-use Shared\Infrastructure\Service\MailService;
+use App\Shared\Infrastructure\Form\CityType;
+use App\Shared\Infrastructure\Service\OpenWeatherMapService;
+use App\Shared\Infrastructure\Service\MailService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

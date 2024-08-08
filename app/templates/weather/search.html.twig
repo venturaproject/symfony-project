@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Weather Search{% endblock %}
+
+{% block body %}
+<div class="flex items-center justify-center min-h-screen">
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-6">Weather Search</h1>
+
+        <!-- Form container with padding, shadow, and rounded corners -->
+        <div class="bg-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-8">
+            {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
+                <div class="mb-4">
+                    {{ form_row(form.city, {
+                        'attr': {
+                            'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight'
+                        }
+                    }) }}
+                </div>
+                <div class="mb-4">
+                    {{ form_row(form.search, {
+                        'attr': {
+                            'class': 'group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                        }
+                    }) }}
+                </div>
+            {{ form_end(form) }}
+        </div>
+
+        {% if weatherData %}
+            <!-- Weather data container with more top margin for spacing -->
+            <div class="bg-white px-8 pt-6 pb-8 mt-12">
+                <h2 class="text-xl font-bold mb-4">Weather in {{ weatherData.city }}</h2>
+                <p class="mb-2">Min Temperature: {{ '%s°C'|format(weatherData.temp_min) }}</p>
+                <p>Max Temperature: {{ '%s°C'|format(weatherData.temp_max) }}</p>
+            </div>
+        {% endif %}
+
+        {% if errorMessage %}
+            <div class="mt-8 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Error:</strong>
+                <span class="block sm:inline">{{ errorMessage }}</span>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

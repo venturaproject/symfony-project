@@ -1,0 +1,29 @@
+# app/config/packages/security.yaml
+
+security:
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Users\Domain\Entity\User
+                property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            provider: app_user_provider
+
+            # Configuración de logout (opcional)
+            logout:
+                path: app_logout
+                target: /
+
+    password_hashers:
+        App\Users\Domain\Entity\User:
+            algorithm: auto
+
+    access_control:
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    

@@ -1,0 +1,43 @@
+parameters:
+    mailer_sender: '%env(MAILER_SENDER)%'
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\:
+    resource: '../src/'
+    exclude:
+      - '../src/DependencyInjection/'
+      - '../src/Entity/'
+      - '../src/Kernel.php'
+
+  # Configuration for classes implementing specific interfaces
+  _instanceof:
+    App\Shared\Application\Command\CommandHandlerInterface:
+      tags:
+        - { name: messenger.message_handler, bus: command.bus }
+
+    App\Shared\Application\Query\QueryHandlerInterface:
+      tags:
+        - { name: messenger.message_handler, bus: query.bus }
+
+  # Explicitly define the RouteNotFoundSubscriber service
+  App\Shared\Infrastructure\EventSubscriber\RouteNotFoundSubscriber:
+    tags:
+      - { name: 'kernel.event_subscriber' }
+    bind:
+      $urlGenerator: '@router'
+
+  # Define the OpenWeatherMapService service
+  App\Shared\Infrastructure\Service\OpenWeatherMapService:
+    arguments:
+      $client: '@http_client'
+      $apiKey: '%env(OPEN_WEATHER_MAP_API_KEY)%'
+      $apiUrl: '%env(OPEN_WEATHER_MAP_API_URL)%'
+
+  # Define the MailService service 
+  App\Shared\Infrastructure\Service\MailService:
+    arguments:
+      $defaultSender: '%mailer_sender%'

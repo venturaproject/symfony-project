@@ -1,0 +1,47 @@
+{# templates/emails/weather_email.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weather Information for {{ weatherData.city }}</h1>
+    <table>
+        <tr>
+            <th>Parameter</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>Min Temperature</td>
+            <td>{{ weatherData.temp_min }}°C</td>
+        </tr>
+        <tr>
+            <td>Max Temperature</td>
+            <td>{{ weatherData.temp_max }}°C</td>
+        </tr>
+    </table>
+</body>
+</html>

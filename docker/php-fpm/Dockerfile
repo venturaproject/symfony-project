@@ -13,7 +13,8 @@ RUN apk add --no-cache \
     linux-headers \
     libpq-dev \
     shadow \
-    rabbitmq-c-dev
+    rabbitmq-c-dev \
+    supervisor
 
 # Install PHP extensions
 RUN pecl install xdebug && \
@@ -23,6 +24,10 @@ RUN pecl install xdebug && \
 RUN pecl install amqp && \
     docker-php-ext-enable amqp && \
     docker-php-ext-install sockets pdo_pgsql
+
+# Install Redis extension
+RUN pecl install redis && \
+    docker-php-ext-enable redis
 
 # Copy custom PHP and Xdebug configuration files into the container
 COPY php.ini /usr/local/etc/php/conf.d/docker-php-config.ini
@@ -44,11 +49,14 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set the working directory for the application
 WORKDIR /var/www
 
+# Copy Supervisor configuration
+COPY ./supervisor/supervisord.conf /etc/supervisord.conf
+
 # Switch to the non-root user for security
 USER www-data
 
 # Expose port 9000 for PHP-FPM
 EXPOSE 9000
 
-# Start PHP-FPM service when the container runs
 CMD ["php-fpm"]
+

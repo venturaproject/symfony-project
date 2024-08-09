@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 parameters:
     mailer_sender: '%env(MAILER_SENDER)%'
 
+=======
+# config/services.yaml
+parameters:
+    mailer_sender: '%env(MAILER_SENDER)%'
+    
+>>>>>>> 540186aa47bc9d1fbc8875da5e0687e86e5192a0
 services:
   _defaults:
     autowire: true
@@ -33,11 +40,18 @@ services:
   # Define the OpenWeatherMapService service
   App\Shared\Infrastructure\Service\OpenWeatherMapService:
     arguments:
+<<<<<<< HEAD
       $client: '@http_client'
       $apiKey: '%env(OPEN_WEATHER_MAP_API_KEY)%'
       $apiUrl: '%env(OPEN_WEATHER_MAP_API_URL)%'
 
   # Define the MailService service 
+=======
+      $apiKey: '%env(OPEN_WEATHER_MAP_API_KEY)%'
+      $apiUrl: '%env(OPEN_WEATHER_MAP_API_URL)%'
+
+  # Define the MailService service
+>>>>>>> 540186aa47bc9d1fbc8875da5e0687e86e5192a0
   App\Shared\Infrastructure\Service\MailService:
     arguments:
       $defaultSender: '%mailer_sender%'

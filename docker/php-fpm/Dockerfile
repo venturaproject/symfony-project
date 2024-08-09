@@ -17,24 +17,15 @@ RUN apk add --no-cache \
     supervisor
 
 # Install PHP extensions
-RUN pecl install xdebug && \
-    docker-php-ext-enable xdebug
-
-# Install the AMQP extension after installing librabbitmq-c
-RUN pecl install amqp && \
-    docker-php-ext-enable amqp && \
+RUN pecl install xdebug redis amqp && \
+    docker-php-ext-enable xdebug redis amqp && \
     docker-php-ext-install sockets pdo_pgsql
-
-# Install Redis extension
-RUN pecl install redis && \
-    docker-php-ext-enable redis
 
 # Copy custom PHP and Xdebug configuration files into the container
 COPY php.ini /usr/local/etc/php/conf.d/docker-php-config.ini
 COPY xdebug.ini /usr/local/etc/php/conf.d/docker-php-xdebug.ini
 
 # Configure non-root user for better security practices
-# Create a non-root user with specified UID and GID for file ownership and permissions
 ARG PUID=1000
 ARG PGID=1000
 RUN groupmod -o -g ${PGID} www-data && \
@@ -49,14 +40,14 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set the working directory for the application
 WORKDIR /var/www
 
+# Create log directory for Supervisor
+RUN mkdir -p /var/log/supervisor
+
 # Copy Supervisor configuration
 COPY ./supervisor/supervisord.conf /etc/supervisord.conf
-
-# Switch to the non-root user for security
-USER www-data
 
 # Expose port 9000 for PHP-FPM
 EXPOSE 9000
 
-CMD ["php-fpm"]
-
+# Start Supervisor and PHP-FPM
+CMD ["supervisord", "-c", "/etc/supervisord.conf"]

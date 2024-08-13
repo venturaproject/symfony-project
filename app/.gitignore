@@ -2,7 +2,7 @@
 /.vscode
 /node_modules
 .DS_Store
-
+supervisord.log
 ###> symfony/framework-bundle ###
 /.env.local
 /.env

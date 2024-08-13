@@ -37,6 +37,10 @@ RUN apk add --no-cache nodejs npm && npm install -g yarn
 # Install Composer for PHP dependency management
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Symfony CLI
+RUN wget https://get.symfony.com/cli/installer -O - | bash \
+    && mv /root/.symfony*/bin/symfony /usr/local/bin/symfony
+
 # Set the working directory for the application
 WORKDIR /var/www
 

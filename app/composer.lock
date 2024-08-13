@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
     "content-hash": "f1cbcdbbda9e2871546398fca2366c70",
-=======
-    "content-hash": "62a2a57917678706dd9e305383741cf2",
->>>>>>> 540186aa47bc9d1fbc8875da5e0687e86e5192a0
     "packages": [
         {
             "name": "doctrine/cache",
@@ -1651,78 +1647,6 @@
             "time": "2021-07-14T16:46:02+00:00"
         },
         {
-<<<<<<< HEAD
-            "name": "symfony/amqp-messenger",
-            "version": "v7.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/amqp-messenger.git",
-                "reference": "60dd57f1083ce81471ad08090e02fa584a612af3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/amqp-messenger/zipball/60dd57f1083ce81471ad08090e02fa584a612af3",
-                "reference": "60dd57f1083ce81471ad08090e02fa584a612af3",
-                "shasum": ""
-            },
-            "require": {
-                "ext-amqp": "*",
-                "php": ">=8.2",
-                "symfony/messenger": "^6.4|^7.0"
-            },
-            "require-dev": {
-                "symfony/event-dispatcher": "^6.4|^7.0",
-                "symfony/process": "^6.4|^7.0",
-                "symfony/property-access": "^6.4|^7.0",
-                "symfony/serializer": "^6.4|^7.0"
-            },
-            "type": "symfony-messenger-bridge",
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Messenger\\Bridge\\Amqp\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony AMQP extension Messenger Bridge",
-            "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/amqp-messenger/tree/v7.1.1"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2024-05-31T14:57:53+00:00"
-        },
-        {
-=======
->>>>>>> 540186aa47bc9d1fbc8875da5e0687e86e5192a0
             "name": "symfony/asset",
             "version": "v7.1.1",
             "source": {
@@ -3650,18 +3574,6 @@
         },
         {
             "name": "symfony/messenger",
-<<<<<<< HEAD
-            "version": "v7.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/messenger.git",
-                "reference": "604e182a7758ceea35921a8ad5dd492a6e13bae4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/messenger/zipball/604e182a7758ceea35921a8ad5dd492a6e13bae4",
-                "reference": "604e182a7758ceea35921a8ad5dd492a6e13bae4",
-=======
             "version": "v7.1.2",
             "source": {
                 "type": "git",
@@ -3672,7 +3584,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/messenger/zipball/8cafca5f0fade46acf4a6b32b2d5e495f798a56b",
                 "reference": "8cafca5f0fade46acf4a6b32b2d5e495f798a56b",
->>>>>>> 540186aa47bc9d1fbc8875da5e0687e86e5192a0
                 "shasum": ""
             },
             "require": {
@@ -3729,11 +3640,7 @@
             "description": "Helps applications send and receive messages to/from other applications or via message queues",
             "homepage": "https://symfony.com",
             "support": {
-<<<<<<< HEAD
-                "source": "https://github.com/symfony/messenger/tree/v7.1.3"
-=======
                 "source": "https://github.com/symfony/messenger/tree/v7.1.2"
->>>>>>> 540186aa47bc9d1fbc8875da5e0687e86e5192a0
             },
             "funding": [
                 {
@@ -3749,11 +3656,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
-            "time": "2024-07-09T19:36:07+00:00"
-=======
             "time": "2024-06-28T08:00:31+00:00"
->>>>>>> 540186aa47bc9d1fbc8875da5e0687e86e5192a0
         },
         {
             "name": "symfony/mime",

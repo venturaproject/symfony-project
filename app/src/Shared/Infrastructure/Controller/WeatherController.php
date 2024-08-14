@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-// src/Shared/Infrastructure/Controller/WeatherController.php
 namespace App\Shared\Infrastructure\Controller;
 
 use App\Shared\Infrastructure\Form\CityType;
@@ -35,15 +34,16 @@ class WeatherController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $city = $form->get('city')->getData();
+            $email = $form->get('email')->getData(); 
             $weatherData = $this->weatherService->getWeatherDataByCity($city);
 
             if (isset($weatherData['error'])) {
                 $errorMessage = $weatherData['error'];
                 $weatherData = null;
             } else {
-                // Send email with weather data
+               
                 $this->mailService->send(
-                    $this->getParameter('mailer_sender'),
+                    $email, 
                     'Weather Information',
                     'weather_email',
                     ['weatherData' => $weatherData]
@@ -58,7 +58,3 @@ class WeatherController extends AbstractController
         ]);
     }
 }
-
-
-
-

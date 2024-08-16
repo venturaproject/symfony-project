@@ -87,6 +87,8 @@ The application architecture is based on the Onion Architecture pattern, emphasi
 │   │   └── Service
 │   │       └── UlidService.php
 │   └── Infrastructure
+│       ├── ApiResource
+│       │   └── .gitignore
 │       ├── Bus
 │       │   ├── CommandBus.php
 │       │   └── QueryBus.php
@@ -94,7 +96,8 @@ The application architecture is based on the Onion Architecture pattern, emphasi
 │       │   ├── HealthCheckAction.php
 │       │   ├── HomepageController.php
 │       │   ├── PhpinfoController.php
-│       │   └── ProductController.php
+│       │   ├── ProductController.php
+│       │   └── WeatherController.php
 │       ├── Database
 │       │   ├── Fixtures
 │       │   │   └── ProductFixtures.php
@@ -102,7 +105,14 @@ The application architecture is based on the Onion Architecture pattern, emphasi
 │       │       ├── Version20240706235206.php
 │       │       ├── Version20240726082748.php
 │       │       └── Version20240726165031.php
-│       └── Kernel.php
+│       ├── EventSubscriber
+│       │   └── RouteNotFoundSubscriber.php
+│       ├── Form
+│       │   └── CityType.php
+│       ├── Kernel.php
+│       └── Service
+│           ├── MailService.php
+│           └── OpenWeatherMapService.php
 └── Users
     ├── Application
     │   ├── Command
@@ -136,6 +146,30 @@ The application architecture is based on the Onion Architecture pattern, emphasi
         └── Repository
             └── UserRepository.php
 ```
+
+## API Connections and Service Examples
+
+In addition to the core architectural patterns and principles implemented, this application also includes examples of how to connect to external APIs and create associated services. These examples are designed to demonstrate best practices for integrating external systems and managing service dependencies.
+
+### API Connections
+
+- **OpenWeatherMapService**: This service provides an example of how to interact with the OpenWeatherMap API to fetch weather data. It demonstrates how to:
+  - Configure API keys and endpoints.
+  - Handle API requests and responses.
+  - Implement error handling and data processing.
+
+  - **Location**: `Shared/Infrastructure/Service/OpenWeatherMapService.php`
+
+### Service Creation
+
+- **MailService**: This service serves as an example for integrating with email systems. It shows how to:
+  - Configure email sending capabilities.
+  - Create methods for composing and sending emails.
+  - Implement integration with external email providers or SMTP servers.
+
+  - **Location**: `Shared/Infrastructure/Service/MailService.php`
+
+These examples provide a foundation for building and integrating additional services into the application, adhering to the principles of clean architecture and separation of concerns.
 
 
 

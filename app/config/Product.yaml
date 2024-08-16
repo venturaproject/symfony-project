@@ -1,7 +1,0 @@
-    App\Products\Domain\Entity\Product:
-        operations:
-            ApiPlatform\Metadata\GetCollection: ~ 
-            ApiPlatform\Metadata\Get: ~
-            ApiPlatform\Metadata\Put: ~
-            ApiPlatform\Metadata\Patch: ~
-            ApiPlatform\Metadata\Post: ~

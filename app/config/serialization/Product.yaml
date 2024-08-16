@@ -1,0 +1,14 @@
+App\Products\Domain\Entity\Product:
+    attributes:
+        ulid:
+            groups: ['product:collection:get', 'product:item:get']
+        name:
+            groups: ['product:collection:get', 'product:item:get']
+        description:
+            groups: ['product:collection:get', 'product:item:get']
+        sku:
+            groups: ['product:collection:get', 'product:item:get']
+        price:
+            groups: ['product:collection:get', 'product:item:get']
+        isActive:
+            groups: ['product:item:get']

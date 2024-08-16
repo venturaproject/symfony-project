@@ -1,8 +1,17 @@
 App\Products\Domain\Entity\Product:
-    operations:
-        ApiPlatform\Metadata\GetCollection: ~
-        ApiPlatform\Metadata\Get: ~
-        ApiPlatform\Metadata\Put: ~
-        ApiPlatform\Metadata\Patch: ~
-        ApiPlatform\Metadata\Post: ~
- 
+    collectionOperations:
+        get:
+            method: 'GET'
+            normalization_context:
+                groups: ['product:collection:get']
+    itemOperations:
+        get:
+            method: 'GET'
+            normalization_context:
+                groups: ['product:item:get']
+        put:
+            method: 'PUT'
+        patch:
+            method: 'PATCH'
+        post:
+            method: 'POST'

@@ -10,3 +10,7 @@ app-container:
 
 run-composer:
 	@docker exec -it $(APP_CONTAINER) composer install
+
+check-supervisor:
+	@docker exec -it $(APP_CONTAINER) supervisorctl status
+

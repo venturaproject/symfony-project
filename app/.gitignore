@@ -25,3 +25,5 @@ supervisord.log
 .phpunit.result.cache
 ###< phpunit/phpunit ###
 check-strict-types.php
+###< phpstan ###
+.phpstan.neon.dist

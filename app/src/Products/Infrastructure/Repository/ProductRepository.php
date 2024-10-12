@@ -26,6 +26,9 @@ class ProductRepository implements ProductRepositoryInterface
         return $this->entityManager->getRepository(Product::class)->find($ulid);
     }
 
+    /**
+     * @return Product[]  
+     */
     public function findActiveProducts(): array
     {
         return $this->entityManager->getRepository(Product::class)->findBy(['isActive' => true]);

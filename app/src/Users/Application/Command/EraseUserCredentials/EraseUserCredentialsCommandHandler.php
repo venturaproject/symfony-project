@@ -19,9 +19,9 @@ class EraseUserCredentialsCommandHandler implements CommandHandlerInterface
 
     public function __invoke(EraseUserCredentialsCommand $command): void
     {
-        $user = $this->userRepository->find($command->getUserId());
+        $user = $this->userRepository->findByUlid($command->getUserId());
 
-        if (!$user) {
+        if ($user === null) {
             throw new \Exception("User not found");
         }
 

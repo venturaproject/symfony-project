@@ -9,9 +9,9 @@ use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
 
 class OpenWeatherMapService
 {
-    private $client;
-    private $apiKey;
-    private $apiUrl;
+    private HttpClientInterface $client; // Tipo especificado
+    private string $apiKey; // Tipo especificado
+    private string $apiUrl; // Tipo especificado
 
     public function __construct(HttpClientInterface $client, string $apiKey, string $apiUrl)
     {
@@ -20,6 +20,9 @@ class OpenWeatherMapService
         $this->apiUrl = $apiUrl;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getWeatherDataByCity(string $city): array
     {
         try {

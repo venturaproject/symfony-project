@@ -12,5 +12,8 @@ interface ProductRepositoryInterface
 
     public function findByUlid(string $ulid): ?Product; 
 
+    /**
+     * @return Product[]  
+     */
     public function findActiveProducts(): array;
 }

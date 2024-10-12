@@ -7,6 +7,10 @@ use App\Users\Domain\Repository\UserRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @template T of User
+ * @extends ServiceEntityRepository<T>
+ */
 class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
@@ -20,7 +24,7 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
         $this->getEntityManager()->flush();
     }
 
-    public function findByUlid(string $ulid): User
+    public function findByUlid(string $ulid): ?User
     {
         return $this->find($ulid);
     }

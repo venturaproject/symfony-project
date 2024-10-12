@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class HomepageController extends AbstractController
 {
-    private $logger;
+    private LoggerInterface $logger; 
 
     public function __construct(LoggerInterface $logger)
     {
@@ -19,7 +19,7 @@ class HomepageController extends AbstractController
     #[Route('/', name: 'app_homepage')]
     public function index(): Response
     {
-        // Ejemplo de registro de mensajes de log
+        
         $this->logger->info('Accediendo a la página de inicio');
 
         return $this->render('homepage/index.html.twig', [

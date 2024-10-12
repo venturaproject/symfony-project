@@ -19,6 +19,9 @@ class MailService
         $this->defaultSender = $defaultSender;
     }
 
+    /**
+     * @param array<string, mixed> $context  
+     */
     public function send(string $to, string $subject, string $template, array $context): void
     {
         $email = (new TemplatedEmail())

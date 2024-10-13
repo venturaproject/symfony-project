@@ -13,7 +13,7 @@ class UserFixture extends Fixture
 
     const REFERENCE = 'user';
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $email = $this->getFaker()->email();
         $password = $this->getFaker()->password();

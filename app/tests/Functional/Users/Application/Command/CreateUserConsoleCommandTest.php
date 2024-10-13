@@ -11,7 +11,7 @@ use Symfony\Component\Console\Command\Command;
 
 class CreateUserConsoleCommandTest extends TestCase
 {
-    public function testExecute()
+    public function testExecute(): void // Agregado el tipo de retorno void
     {
         // Crear un mock del handler
         $commandHandler = $this->createMock(CreateUserCommandHandler::class);
@@ -43,3 +43,4 @@ class CreateUserConsoleCommandTest extends TestCase
         $this->assertEquals(Command::SUCCESS, $commandTester->getStatusCode());
     }
 }
+

@@ -1,8 +1,8 @@
 <?php
-
 namespace App\Tests\Functional\Users\Infrastructure\Repository;
 
 use App\Tests\Resource\Fixture\UserFixture;
+use App\Users\Domain\Entity\User; 
 use App\Users\Domain\Factory\UserFactory;
 use App\Users\Infrastructure\Repository\UserRepository;
 use Faker\Factory;
@@ -11,9 +11,16 @@ use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * @template T of User
+ */
 class UserRepositoryTest extends WebTestCase
 {
+    /** 
+     * @var UserRepository<User> 
+     */
     private UserRepository $repository;
+
     private Generator $faker;
     private AbstractDatabaseTool $databaseTool;
 
